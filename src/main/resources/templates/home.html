@@ -10,15 +10,11 @@
 
 <body>
 
-<!-- Include the header -->
-<div th:replace="header :: header"></div>
-
 <div class="container mt-4">
 
-    <!-- Search Form -->
-    <!-- Uncomment and configure this section if needed -->
     <div class="row mb-4">
         <div class="col-xs-12 col-sm-8 col-md-6">
+            <!-- Assuming you might want to have a search functionality in the future -->
             <form th:action="@{/search}" method="get">
                 <div class="input-group">
                     <input type="text" name="searchInput" class="form-control" placeholder="Search by name or author...." />
@@ -30,35 +26,32 @@
         </div>
     </div>
 
-    <!-- Table of Products -->
+    <!-- Table of Test Details -->
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-10">
-            <div th:if="${not #lists.isEmpty(productList)}">
+            <div th:if="${not #lists.isEmpty(testDetails)}">
                 <table class="table table-condensed table-hover">
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Age</th>
-                        <th>Actions</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Test Name</th>
+                        <th>Point</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="product : ${productList}">
-                        <td th:text="${product.id}"></td>
-                        <td th:text="${product.name}"></td>
-                        <td th:text="${product.address}"></td>
-                        <td th:text="${product.age}"></td>
-                        <td>
-                            <a class="btn btn-sm btn-primary" th:href="@{/edit/{id}(id=${product.id})}">Edit</a>
-                            <a class="btn btn-sm btn-danger" th:href="@{/delete/{id}(id=${product.id})}">Delete</a>
-                        </td>
+                    <tr th:each="testDetail : ${testDetails}">
+                        <td th:text="${testDetail.student.id}"></td>
+                        <td th:text="${testDetail.student.fullName}"></td>
+                        <td th:text="${testDetail.student.email}"></td>
+                        <td th:text="${testDetail.test.name}"></td>
+                        <td th:text="${testDetail.pointObtained}"></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <div th:if="${#lists.isEmpty(productList)}" class="alert alert-warning">
+            <div th:if="${#lists.isEmpty(testDetails)}" class="alert alert-warning">
                 There is no data
             </div>
         </div>
